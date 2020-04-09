@@ -12,12 +12,12 @@ module.exports = {
 
         try {
             await connection('meetings').insert({
-                id: id,
-                title: title,
-                description: description,
-                location: location,
-                start: start,
-                end: end
+                id,
+                title,
+                description,
+                location,
+                start,
+                end
             });
 
             response.sendStatus(204);
