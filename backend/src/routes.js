@@ -62,8 +62,8 @@ routes.put('/profile', celebrate({
 }), tokenController.verify, profileController.update);
 
 //Meeting routes
-routes.get('/meetings', meetingController.index);
-routes.post('/meetings', meetingController.create);
-routes.delete('/meetings/:id', meetingController.delete);
+routes.get('/meetings', tokenController.verify, meetingController.index);
+routes.post('/meetings', tokenController.verify, meetingController.create);
+routes.delete('/meetings/:id', tokenController.verify, meetingController.delete);
 
 module.exports = routes;
