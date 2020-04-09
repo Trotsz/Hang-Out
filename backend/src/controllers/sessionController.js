@@ -11,7 +11,7 @@ module.exports = {
         try {
             const { email, password } = req.body;
             const user = await connection('users')
-                .select('email', 'password', 'email')
+                .select('email', 'password')
                 .where('email', email)
                 .first();
             

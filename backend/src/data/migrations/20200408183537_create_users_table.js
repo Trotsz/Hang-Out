@@ -5,12 +5,13 @@ exports.up = function(knex) {
         table.string('name').notNullable();
         table.binary('picture');
         table.string('bio');
-        table.string('interests').notNullable();
+        table.string('interests').notNullable().defaultTo([]);
         table.string('email').notNullable();
         table.string('password').notNullable();
         table.integer('points').defaultTo(0);
-        table.string('reftoken');
         table.string('location');
+        table.string('reftoken');
+       
     });
 };
 

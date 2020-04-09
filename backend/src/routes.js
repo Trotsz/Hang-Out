@@ -4,7 +4,7 @@ const routes = express.Router();
 
 const userController = require('./controllers/userController');
 const sessionController = require('./controllers/sessionController');
-// const profileController = require('./controllers/profileController');
+const profileController = require('./controllers/profileController');
 const tokenController = require('./controllers/tokensController');
 
 //Session routes
@@ -48,5 +48,15 @@ routes.delete('/users/:id', celebrate({
 }), tokenController.verify, userController.delete);
 
 //Profile routes
-// routes.get('/profile', tokenController.verify, profileController.index);
+routes.get('/profile', tokenController.verify, profileController.index);
+routes.put('/profile', celebrate({
+    [Segments.BODY]: Joi.object().keys({
+        id: Joi.string().required(),
+        name: Joi.string().required(),
+        email: Joi.string().email().required(),
+        picture: Joi.binary(),
+        interests: Joi.array().items(Joi.string()).required(),
+        bio: Joi.string()
+    })
+}), tokenController.verify, profileController.update);
 module.exports = routes;
