@@ -6,6 +6,7 @@ const userController = require('./controllers/userController');
 const sessionController = require('./controllers/sessionController');
 const profileController = require('./controllers/profileController');
 const tokenController = require('./controllers/tokensController');
+const meetingController = require('./controllers/meetingController');
 
 //Session routes
 routes.post('/sessions', celebrate({
@@ -59,4 +60,10 @@ routes.put('/profile', celebrate({
         bio: Joi.string()
     })
 }), tokenController.verify, profileController.update);
+
+//Meeting routes
+routes.get('/meetings', meetingController.index);
+routes.post('/meetings', meetingController.create);
+routes.delete('/meetings/:id', meetingController.delete);
+
 module.exports = routes;
