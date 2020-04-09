@@ -6,7 +6,7 @@ module.exports = {
     
     //Users list
     async index(req, res) {
-        const users = await connection('users').select('name', 'location');
+        const users = await connection('users').select('id', 'location');
         return res.json(users);
     },
 
@@ -47,6 +47,16 @@ module.exports = {
 
     //Delete user
     async delete(req, res) {
+        const { id } = req.params;
+        try {
+            await connection('users')
+                     .where('id', id)
+                     .delete();
+            
+            return res.sendStatus(204);
+        } catch (e) {
+            return res.json({ error: "A error occurred while the server was deleting your account. Try again"})
+        }
 
     }
 }
